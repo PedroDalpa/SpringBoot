@@ -31,7 +31,7 @@ public class AnimeService {
     }
 
     public Anime create(Anime anime) {
-        anime.setId(ThreadLocalRandom.current().nextLong(3,100000));
+        anime.setId(ThreadLocalRandom.current().nextLong(3, 100000));
         animes.add(anime);
 
         return anime;
@@ -39,6 +39,11 @@ public class AnimeService {
 
     public void delete(long id) {
         animes.remove(findById(id));
+    }
+
+    public void update(Anime anime) {
+        delete(anime.getId());
+        animes.add(anime);
     }
 
 }
