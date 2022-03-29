@@ -1,6 +1,8 @@
 package academy.dev.esssencialspringboot.controller;
 
 import academy.dev.esssencialspringboot.domain.Anime;
+import academy.dev.esssencialspringboot.requests.AnimePostRequestBody;
+import academy.dev.esssencialspringboot.requests.AnimePutRequestBody;
 import academy.dev.esssencialspringboot.service.AnimeService;
 import academy.dev.esssencialspringboot.util.DateUtil;
 import lombok.AllArgsConstructor;
@@ -33,7 +35,7 @@ public class AnimeController {
     }
 
     @PostMapping
-    public ResponseEntity<Anime> create(@RequestBody Anime anime) {
+    public ResponseEntity<Anime> create(@RequestBody AnimePostRequestBody anime) {
         return new ResponseEntity<>(animeService.create(anime), HttpStatus.CREATED);
     }
 
@@ -44,7 +46,7 @@ public class AnimeController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> edit(@RequestBody Anime anime) {
+    public ResponseEntity<Void> edit(@RequestBody AnimePutRequestBody anime) {
         animeService.update(anime);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
