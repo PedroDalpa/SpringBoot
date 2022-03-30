@@ -1,17 +1,19 @@
 package academy.dev.esssencialspringboot.service;
 
 import academy.dev.esssencialspringboot.domain.Anime;
+import academy.dev.esssencialspringboot.mapper.AnimeMapper;
 import academy.dev.esssencialspringboot.repository.AnimeRepository;
 import academy.dev.esssencialspringboot.requests.AnimePostRequestBody;
 import academy.dev.esssencialspringboot.requests.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class AnimeService {
@@ -21,6 +23,10 @@ public class AnimeService {
         return animeRepository.findAll();
     }
 
+    public List<Anime> listByName(String name) {
+        return animeRepository.findByName(name);
+    }
+
     public Anime findById(long id) {
         return animeRepository
                 .findById(id)
@@ -28,8 +34,7 @@ public class AnimeService {
     }
 
     public Anime create(AnimePostRequestBody animePostRequestBody) {
-        Anime anime = Anime.builder().name(animePostRequestBody.getName()).build();
-        return animeRepository.save(anime);
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
     public void delete(long id) {
@@ -37,11 +42,9 @@ public class AnimeService {
     }
 
     public void update(AnimePutRequestBody animePutRequestBody) {
-        findById(animePutRequestBody.getId());
-        Anime anime = Anime.builder()
-                .id(animePutRequestBody.getId())
-                .name(animePutRequestBody.getName())
-                .build();
+        Anime savedAnime = findById(animePutRequestBody.getId());
+        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
+        anime.setId(savedAnime.getId());
 
         animeRepository.save(anime);
     }
