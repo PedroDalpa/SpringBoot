@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,7 +34,7 @@ public class RestExceptionHandler {
             MethodArgumentNotValidException exception
     ) {
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-`
+
         String fields = fieldErrors.stream().map(FieldError::getField).collect(Collectors.joining(", "));
 
         String fieldsMessage = fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(", "));

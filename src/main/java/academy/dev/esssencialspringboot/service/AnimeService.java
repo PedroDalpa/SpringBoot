@@ -8,6 +8,8 @@ import academy.dev.esssencialspringboot.requests.AnimePostRequestBody;
 import academy.dev.esssencialspringboot.requests.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +21,8 @@ import java.util.List;
 public class AnimeService {
     private final AnimeRepository animeRepository;
 
-    public List<Anime> listAll() {
-        return animeRepository.findAll();
+    public Page<Anime> listAll(Pageable peaPageable) {
+        return animeRepository.findAll(peaPageable);
     }
 
     public List<Anime> listByName(String name) {
