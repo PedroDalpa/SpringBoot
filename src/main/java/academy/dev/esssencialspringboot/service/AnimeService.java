@@ -25,6 +25,10 @@ public class AnimeService {
         return animeRepository.findAll(peaPageable);
     }
 
+    public List<Anime> listAllNonPageable() {
+        return animeRepository.findAll();
+    }
+
     public List<Anime> listByName(String name) {
         return animeRepository.findByName(name);
     }
@@ -51,5 +55,4 @@ public class AnimeService {
 
         animeRepository.save(anime);
     }
-
 }
