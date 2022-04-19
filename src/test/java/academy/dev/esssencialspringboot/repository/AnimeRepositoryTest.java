@@ -1,18 +1,20 @@
 package academy.dev.esssencialspringboot.repository;
 
-import academy.dev.esssencialspringboot.domain.Anime;
-import lombok.extern.log4j.Log4j2;
+import static academy.dev.esssencialspringboot.util.AnimeCreator.createAnimeToBeSaved;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.ConstraintViolationException;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import javax.validation.ConstraintViolationException;
-import java.util.List;
-import java.util.Optional;
-
-import static academy.dev.esssencialspringboot.util.AnimeCreator.createAnimeToBeSaved;
+import academy.dev.esssencialspringboot.domain.Anime;
+import lombok.extern.log4j.Log4j2;
 
 @DataJpaTest
 @DisplayName("Tests for Anime repository")

@@ -1,24 +1,31 @@
 package academy.dev.esssencialspringboot.controller;
 
-import academy.dev.esssencialspringboot.domain.Anime;
-import academy.dev.esssencialspringboot.requests.AnimePostRequestBody;
-import academy.dev.esssencialspringboot.requests.AnimePutRequestBody;
-import academy.dev.esssencialspringboot.service.AnimeService;
-import academy.dev.esssencialspringboot.util.DateUtil;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
+import academy.dev.esssencialspringboot.domain.Anime;
+import academy.dev.esssencialspringboot.requests.AnimePostRequestBody;
+import academy.dev.esssencialspringboot.requests.AnimePutRequestBody;
+import academy.dev.esssencialspringboot.service.AnimeService;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("animes")
-@Log4j2
 @AllArgsConstructor
 public class AnimeController {
 
@@ -33,7 +40,6 @@ public class AnimeController {
     public ResponseEntity<List<Anime>> listAll() {
         return ResponseEntity.ok(animeService.listAllNonPageable());
     }
-
 
     @GetMapping(path = "/find")
     public ResponseEntity<List<Anime>> listByName(@RequestParam String name) {

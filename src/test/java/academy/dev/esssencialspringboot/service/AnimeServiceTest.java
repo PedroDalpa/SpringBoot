@@ -50,7 +50,7 @@ class AnimeServiceTest {
     void listAll_ReturnsListOfAnimesInsidePageObject_WhenSuccessful() {
         String expectedName = AnimeCreator.createValidAnime().getName();
 
-        Page<Anime> animePage = animeService.listAll(PageRequest.of(1,1));
+        Page<Anime> animePage = animeService.listAll(PageRequest.of(1, 1));
 
         Assertions.assertThat(animePage).isNotNull();
         Assertions.assertThat(animePage.toList()).isNotNull().hasSize(1);
@@ -95,7 +95,7 @@ class AnimeServiceTest {
                 .thenReturn(Optional.empty());
 
         Assertions.assertThatExceptionOfType(BadRequestException.class)
-                .isThrownBy(()->animeService.findById(1));
+                .isThrownBy(() -> animeService.findById(1));
 
     }
 
